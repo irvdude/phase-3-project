@@ -15,3 +15,26 @@ if __name__ == "__main__":
     session.query(Household).delete()
     session.query(Chore).delete()
     session.commit()
+
+    house_members = [
+        Household(name=fake.name(), age=random.randint(10, 40)) for i in range(4)
+    ]
+
+    session.add_all(house_members)
+    session.commit()
+
+    chores = []
+    for member in house_members:
+        for i in range(3):
+            chore = Chore(
+                chore_name=random.choice(
+                    ["dishes", "laundry", "sweeping", "mopping", "trash"]
+                ),
+                priority=random.choice(["high", "medium", "low"]),
+            )
+
+            chores.append(chore)
+
+    session.bulk_save_objects(chores)
+    session.commit()
+    session.close()
