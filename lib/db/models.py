@@ -23,3 +23,6 @@ class Chore(Base):
     id = Column(Integer(), primary_key=True)
     chore_name = Column(Integer())
     priority = Column(String())
+
+    def __repr__(self):
+        return f"Chore: {self.chore_name}" + f"Priority: {self.priority}"
