@@ -1,4 +1,4 @@
-from sqlalchemy import ForeignKey, Column, Integer, String, MetaData
+from sqlalchemy import ForeignKey, Column, Integer, String
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -11,7 +11,7 @@ class Household(Base):
     id = Column(Integer(), primary_key=True)
     name = Column(String())
     age = Column(Integer())
-    chore = relationship("Chore", backref=backref("member"))
+    chore = relationship("Chore", backref=backref("house_member"))
 
     def __repr__(self):
         return f"Person: {self.name}" + f"Age: {self.age}" + f"Chore: {self.chore}"

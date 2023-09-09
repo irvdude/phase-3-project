@@ -25,15 +25,15 @@ if __name__ == "__main__":
 
     chores = []
     for member in house_members:
-        for i in range(3):
-            chore = Chore(
-                chore_name=random.choice(
-                    ["dishes", "laundry", "sweeping", "mopping", "trash"]
-                ),
-                priority=random.choice(["high", "medium", "low"]),
-            )
+        chore = Chore(
+            chore_name=random.choice(
+                ["dishes", "laundry", "sweeping", "mopping", "trash"]
+            ),
+            priority=random.choice(["high", "medium", "low"]),
+            chore_id=member.id,
+        )
 
-            chores.append(chore)
+        chores.append(chore)
 
     session.bulk_save_objects(chores)
     session.commit()
