@@ -2,7 +2,6 @@ from sqlalchemy import ForeignKey, Column, Integer, String
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
 
-from seed import session
 
 Base = declarative_base()
 
@@ -34,3 +33,8 @@ class Chore(Base):
 
     def __repr__(self):
         return f"Chore: {self.chore_name}" + f"Priority: {self.priority}"
+
+    @classmethod
+    def list_chores(cls, session):
+        chore = session.query(cls).all()
+        return chore
