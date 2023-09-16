@@ -17,10 +17,22 @@ class Person(Base):
     def __repr__(self):
         return f"Person: {self.name}" + f"Age: {self.age}" + f"Chore: {self.chore}"
 
+    # class method to list all people
     @classmethod
     def list_people(cls, session):
         member = session.query(cls).all()
         return member
+
+    # class method to get all of the chores by person name
+    @classmethod
+    def chores_by_person(cls, session, name):
+        chore = session.query(cls).filter_by(name=name).first()
+        if chore:
+            return chore.chore
+        else:
+            return []
+
+    # class method to assign chores to a person
 
 
 class Chore(Base):
@@ -34,7 +46,10 @@ class Chore(Base):
     def __repr__(self):
         return f"Chore: {self.chore_name}" + f"Priority: {self.priority}"
 
+    # class method to list all chores
     @classmethod
     def list_chores(cls, session):
         chore = session.query(cls).all()
         return chore
+
+    # class method to list all people by chore
