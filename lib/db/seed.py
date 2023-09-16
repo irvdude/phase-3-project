@@ -3,21 +3,22 @@ import random
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from models import Household, Chore
 
 fake = Faker()
 
-if __name__ == "__main__":
-    engine = create_engine("sqlite:///household_chores.db")
-    Session = sessionmaker(bind=engine)
-    session = Session()
+engine = create_engine("sqlite:///household_chores.db")
+Session = sessionmaker(bind=engine)
+session = Session()
 
-    session.query(Household).delete()
+if __name__ == "__main__":
+    from models import Person, Chore
+
+    session.query(Person).delete()
     session.query(Chore).delete()
     session.commit()
 
     house_members = [
-        Household(name=fake.name(), age=random.randint(10, 40)) for i in range(4)
+        Person(name=fake.name(), age=random.randint(10, 40)) for i in range(4)
     ]
 
     session.add_all(house_members)
