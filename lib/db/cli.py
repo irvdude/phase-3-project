@@ -11,7 +11,7 @@ class Cli:
         if options[menu_entry_index] == "Person":
             self.give_all_people()
         if options[menu_entry_index] == "Chores":
-            print("These are your chores")
+            self.give_all_chores()
 
     def give_all_people(self):
         people = Person.list_people(session)
@@ -27,7 +27,7 @@ class Cli:
         if chores:
             print("List of chores")
             for chore in chores:
-                print([chore.name])
+                print(chore.chore_name)
 
 
 app = Cli()
